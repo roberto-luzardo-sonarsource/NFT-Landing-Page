@@ -1,27 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
     }
   };
-
-  const NavLinks = () => (
-    <>
-      <button onClick={() => scrollToSection('about')} className="nav-link">ABOUT</button>
-      <button onClick={() => scrollToSection('artworks')} className="nav-link">ARTWORKS</button>
-      <button onClick={() => scrollToSection('contact')} className="nav-link">CONTACT</button>
-      <button className="btn-primary">SHOP NFT</button>
-    </>
-  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md">
@@ -34,19 +19,17 @@ const Navbar = () => {
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">
-          <NavLinks />
+          <button onClick={() => scrollToSection('about')} className="nav-link">ABOUT</button>
+          <button onClick={() => scrollToSection('artworks')} className="nav-link">ARTWORKS</button>
+          <button onClick={() => scrollToSection('contact')} className="nav-link">CONTACT</button>
+          <button className="btn-primary">SHOP NFT</button>
         </div>
         
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger className="md:hidden">
-            <Menu className="h-6 w-6" />
-          </SheetTrigger>
-          <SheetContent side="right" className="bg-darkBg border-gray-800 w-[300px]">
-            <div className="flex flex-col space-y-6 mt-8">
-              <NavLinks />
-            </div>
-          </SheetContent>
-        </Sheet>
+        <button className="md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
     </nav>
   );
