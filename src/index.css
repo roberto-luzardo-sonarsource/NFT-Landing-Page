@@ -5,12 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-darkBg text-white font-body;
 }
 
 .nft-card {
-  @apply transition-transform duration-300 hover:scale-105;
+  @apply transition-all duration-300;
 }
 
 .nav-link {

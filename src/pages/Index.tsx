@@ -1,69 +1,136 @@
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import NFTCard from '../components/NFTCard';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// Categories and artwork data
+const categories = ["ALL", "ILLUSTRATION", "PHOTOGRAPHY", "3D", "MOTION"];
 
 const artworks = [
   {
     image: "https://images.unsplash.com/photo-1634986666676-ec8fd927c23d",
     title: "Frames of Mind",
-    price: { eth: 1.8, usd: 5034 }
+    price: { eth: 1.8, usd: 5034 },
+    category: "ILLUSTRATION"
   },
   {
-    image: "https://images.unsplash.com/photo-1633537066008-1a51744c0f86",
+    image: "https://images.unsplash.com/photo-1633537666008-1a51744c0f86",
     title: "Form of Time",
-    price: { eth: 1.5, usd: 4195 }
+    price: { eth: 1.5, usd: 4195 },
+    category: "ILLUSTRATION"
   },
   {
     image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e",
     title: "Quantum Chains",
-    price: { eth: 1.9, usd: 5470 }
+    price: { eth: 1.9, usd: 5470 },
+    category: "3D"
   },
   {
     image: "https://images.unsplash.com/photo-1638803040283-7a5ffd48dad5",
     title: "Techno Angel",
-    price: { eth: 1.7, usd: 4754 }
+    price: { eth: 1.7, usd: 4754 },
+    category: "3D"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+    title: "Digital Dreams",
+    price: { eth: 2.1, usd: 5890 },
+    category: "MOTION"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    title: "Cyber Symphony",
+    price: { eth: 1.6, usd: 4480 },
+    category: "MOTION"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    title: "Nature's Code",
+    price: { eth: 2.3, usd: 6440 },
+    category: "PHOTOGRAPHY"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    title: "Digital Horizon",
+    price: { eth: 1.9, usd: 5320 },
+    category: "PHOTOGRAPHY"
   }
 ];
 
 const Index = () => {
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
+
+  const filteredArtworks = selectedCategory === "ALL" 
+    ? artworks 
+    : artworks.filter(art => art.category === selectedCategory);
+
   return (
     <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="pt-32 pb-20 px-4"
+      >
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="font-display text-5xl md:text-7xl leading-tight mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-tight mb-6">
                 Extraordinary<br />
                 rare digital NFT
               </h1>
               <p className="text-gray-400 mb-8">by <span className="text-neonGreen">Matt Gardner</span></p>
               <button className="btn-primary">VIEW MORE</button>
               
-              <div className="grid grid-cols-3 gap-8 mt-16">
-                <div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-16">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <h3 className="font-display text-3xl mb-2">200+</h3>
                   <p className="text-gray-400">Artworks</p>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <h3 className="font-display text-3xl mb-2">40+</h3>
                   <p className="text-gray-400">Clients Worldwide</p>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <h3 className="font-display text-3xl mb-2">12</h3>
                   <p className="text-gray-400">Awards</p>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="relative"
+            >
               <img 
                 src="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d" 
                 alt="Featured NFT" 
                 className="rounded-2xl w-full"
               />
-              <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md rounded-xl p-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md rounded-xl p-4"
+              >
                 <div className="flex justify-between items-center">
                   <div>
                     <h3 className="font-display">Super Yetti</h3>
@@ -72,30 +139,62 @@ const Index = () => {
                   </div>
                   <button className="btn-primary">PLACE BID</button>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
       
       {/* Gallery Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
-          <h2 className="font-display text-4xl mb-12">Artworks</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="font-display text-4xl mb-12"
+          >
+            Artworks
+          </motion.h2>
           
-          <div className="flex space-x-4 mb-8">
-            <button className="btn-secondary">ALL</button>
-            <button className="btn-secondary">ILLUSTRATION</button>
-            <button className="btn-secondary">PHOTOGRAPHY</button>
-            <button className="btn-secondary">3D</button>
-            <button className="btn-secondary">MOTION</button>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {artworks.map((artwork, index) => (
-              <NFTCard key={index} {...artwork} />
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-wrap gap-4 mb-8"
+          >
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`btn-secondary ${
+                  selectedCategory === category ? "bg-white/20" : ""
+                }`}
+              >
+                {category}
+              </button>
             ))}
-          </div>
+          </motion.div>
+          
+          <motion.div 
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            <AnimatePresence>
+              {filteredArtworks.map((artwork, index) => (
+                <motion.div
+                  key={artwork.title}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <NFTCard {...artwork} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
     </div>
