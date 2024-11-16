@@ -1,4 +1,4 @@
-# Crypterio Theme
+# NFT Landing Page
 
 ## Project info
 
