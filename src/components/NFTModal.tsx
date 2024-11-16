@@ -20,12 +20,12 @@ interface NFTModalProps {
 const NFTModal = ({ isOpen, onClose, nft }: NFTModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-cardBg border-gray-800 text-white max-w-4xl">
+      <DialogContent className="bg-cardBg border-gray-800 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl pr-8">{nft.title}</DialogTitle>
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 p-2 rounded-full hover:bg-white/10 transition-colors duration-200 z-50"
+            className="fixed right-4 top-4 p-2 rounded-full hover:bg-white/10 transition-colors duration-200 z-50 bg-black/50 backdrop-blur-sm"
           >
             <X className="h-6 w-6" />
           </button>
