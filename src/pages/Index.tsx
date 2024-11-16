@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import NFTCard from '../components/NFTCard';
 import { motion, AnimatePresence } from 'framer-motion';
+import AboutSection from '../components/sections/AboutSection';
+import ContactSection from '../components/sections/ContactSection';
 
 // Categories and artwork data
 const categories = ["ALL", "ILLUSTRATION", "PHOTOGRAPHY", "3D", "MOTION"];
@@ -14,8 +16,9 @@ const artworks = [
     category: "ILLUSTRATION"
   },
   {
-    image: "https://images.unsplash.com/photo-1633537666008-1a51744c0f86",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     title: "Form of Time",
+    description: "A mesmerizing digital illustration that explores the concept of time through surreal visual elements.",
     price: { eth: 1.5, usd: 4195 },
     category: "ILLUSTRATION"
   },
@@ -145,13 +148,17 @@ const Index = () => {
         </div>
       </motion.section>
       
+      {/* About Section */}
+      <AboutSection />
+      
       {/* Gallery Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4" id="artworks">
         <div className="container mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="font-display text-4xl mb-12"
           >
             Artworks
@@ -161,6 +168,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="flex flex-wrap gap-4 mb-8"
           >
             {categories.map((category) => (
@@ -197,6 +205,9 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   );
 };
