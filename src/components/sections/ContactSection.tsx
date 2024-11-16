@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
-const ContactSection = () => {
+const ContactSection = ({ id }: { id: string }) => {
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4" id={id}>
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

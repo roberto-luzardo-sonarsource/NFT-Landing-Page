@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -12,9 +19,9 @@ const Navbar = () => {
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/about" className="nav-link">ABOUT</Link>
-          <Link to="/artworks" className="nav-link">ARTWORKS</Link>
-          <Link to="/contact" className="nav-link">CONTACT</Link>
+          <button onClick={() => scrollToSection('about')} className="nav-link">ABOUT</button>
+          <button onClick={() => scrollToSection('artworks')} className="nav-link">ARTWORKS</button>
+          <button onClick={() => scrollToSection('contact')} className="nav-link">CONTACT</button>
           <button className="btn-primary">SHOP NFT</button>
         </div>
         

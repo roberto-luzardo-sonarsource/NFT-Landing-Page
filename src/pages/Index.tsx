@@ -84,6 +84,7 @@ const Index = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
+              className="relative z-10"
             >
               <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-tight mb-6">
                 Extraordinary<br />
@@ -121,7 +122,7 @@ const Index = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="relative"
+              className="relative z-0"
             >
               <img 
                 src="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d" 
@@ -149,7 +150,7 @@ const Index = () => {
       </motion.section>
       
       {/* About Section */}
-      <AboutSection />
+      <AboutSection id="about" />
       
       {/* Gallery Section */}
       <section className="py-20 px-4" id="artworks">
@@ -207,7 +208,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <ContactSection />
+      <ContactSection id="contact" />
     </div>
   );
 };
