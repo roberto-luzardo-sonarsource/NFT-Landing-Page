@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false);
     }
   };
 
@@ -24,12 +30,22 @@ const Navbar = () => {
           <button onClick={() => scrollToSection('contact')} className="nav-link">CONTACT</button>
           <button className="btn-primary">SHOP NFT</button>
         </div>
-        
-        <button className="md:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger className="md:hidden">
+            <Menu className="h-6 w-6" />
+          </SheetTrigger>
+          <SheetContent side="right" className="bg-cardBg border-gray-800 p-0">
+            <div className="flex flex-col h-full">
+              <div className="p-6 flex flex-col space-y-6">
+                <button onClick={() => scrollToSection('about')} className="nav-link text-left text-lg">ABOUT</button>
+                <button onClick={() => scrollToSection('artworks')} className="nav-link text-left text-lg">ARTWORKS</button>
+                <button onClick={() => scrollToSection('contact')} className="nav-link text-left text-lg">CONTACT</button>
+                <button className="btn-primary w-full">SHOP NFT</button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </nav>
   );

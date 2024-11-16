@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
 
 interface NFTModalProps {
   isOpen: boolean;
@@ -22,6 +23,12 @@ const NFTModal = ({ isOpen, onClose, nft }: NFTModalProps) => {
       <DialogContent className="bg-cardBg border-gray-800 text-white max-w-4xl">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl">{nft.title}</DialogTitle>
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 p-2 rounded-full hover:bg-white/10 transition-colors duration-200"
+          >
+            <X className="h-6 w-6" />
+          </button>
         </DialogHeader>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="aspect-square rounded-lg overflow-hidden">

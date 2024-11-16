@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
-import NFTCard from '../components/NFTCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import AboutSection from '../components/sections/AboutSection';
-import ContactSection from '../components/sections/ContactSection';
+import Footer from '../components/Footer';
+
+// Lazy load components
+const NFTCard = lazy(() => import('../components/NFTCard'));
+const AboutSection = lazy(() => import('../components/sections/AboutSection'));
+const ContactSection = lazy(() => import('../components/sections/ContactSection'));
 
 // Categories and artwork data
 const categories = ["ALL", "ILLUSTRATION", "PHOTOGRAPHY", "3D", "MOTION"];
@@ -150,7 +153,9 @@ const Index = () => {
       </motion.section>
       
       {/* About Section */}
-      <AboutSection id="about" />
+      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <AboutSection id="about" />
+      </Suspense>
       
       {/* Gallery Section */}
       <section className="py-20 px-4" id="artworks">
@@ -191,16 +196,17 @@ const Index = () => {
           >
             <AnimatePresence>
               {filteredArtworks.map((artwork, index) => (
-                <motion.div
-                  key={artwork.title}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <NFTCard {...artwork} />
-                </motion.div>
+                <Suspense key={artwork.title} fallback={<div className="aspect-square bg-cardBg animate-pulse rounded-2xl" />}>
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                  >
+                    <NFTCard {...artwork} />
+                  </motion.div>
+                </Suspense>
               ))}
             </AnimatePresence>
           </motion.div>
@@ -208,7 +214,11 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <ContactSection id="contact" />
+      <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <ContactSection id="contact" />
+      </Suspense>
+
+      <Footer />
     </div>
   );
 };
