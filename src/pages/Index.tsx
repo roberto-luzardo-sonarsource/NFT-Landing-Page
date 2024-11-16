@@ -70,6 +70,11 @@ const Index = () => {
     ? artworks 
     : artworks.filter(art => art.category === selectedCategory);
 
+  const scrollToArtworks = () => {
+    const artworksSection = document.getElementById('artworks');
+    artworksSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -94,7 +99,7 @@ const Index = () => {
                 rare digital NFT
               </h1>
               <p className="text-gray-400 mb-8">by <span className="text-neonGreen">Matt Gardner</span></p>
-              <button className="btn-primary">VIEW MORE</button>
+              <button onClick={scrollToArtworks} className="btn-primary">VIEW MORE</button>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-16">
                 <motion.div
