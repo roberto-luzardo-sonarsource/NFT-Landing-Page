@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Twitter, Instagram, Discord, Github } from 'lucide-react';
+import { Twitter, Instagram, MessageCircle, Github } from 'lucide-react';
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
@@ -61,7 +61,7 @@ const Footer = () => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Discord className="w-5 h-5" />
+                <MessageCircle className="w-5 h-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="w-5 h-5" />
